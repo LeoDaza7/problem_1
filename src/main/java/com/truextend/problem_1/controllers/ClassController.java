@@ -19,6 +19,11 @@ public class ClassController {
         return classService.readClassAll();
     }
 
+    @GetMapping("/class/{id}")
+    public Class getClass(@PathVariable(value = "id") int code){
+        return classService.readClass(code);
+    }
+
     @PostMapping("/class")
     public Class postClass(@RequestBody Class classes) {
         return classService.createClass(classes);

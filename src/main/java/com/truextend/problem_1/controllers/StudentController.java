@@ -19,6 +19,11 @@ public class StudentController {
         return studentService.readStudentAll();
     }
 
+    @GetMapping("/student/{id}")
+    public Student getStudent(@PathVariable(value = "id") int studentId) {
+        return studentService.readStudent(studentId);
+    }
+
     @PostMapping("/student")
     public Student postStudent(@RequestBody Student student) {
         return studentService.createStudent(student);
