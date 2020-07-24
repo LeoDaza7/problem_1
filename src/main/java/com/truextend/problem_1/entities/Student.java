@@ -12,7 +12,7 @@ import lombok.Setter;
 public class Student {
 
     private int studentID;
-    private String firstName;
     private String lastName;
+    private String firstName;
 
 }
