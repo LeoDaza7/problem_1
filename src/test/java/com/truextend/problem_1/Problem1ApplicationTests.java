@@ -2,6 +2,7 @@ package com.truextend.problem_1;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.truextend.problem_1.entities.Class;
+import com.truextend.problem_1.entities.Student;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -40,7 +41,7 @@ class Problem1ApplicationTests {
 	}
 
 	@Test
-	public void UpdateClassOk () throws Exception {
+	public void updateClassOk () throws Exception {
 		Class testClass = new Class(1,"Math","virtual class");
 		mvc.perform(MockMvcRequestBuilders
 				.put("/api/class/1")
@@ -50,7 +51,7 @@ class Problem1ApplicationTests {
 	}
 
 	@Test
-	public void UpdateClassWithError () throws Exception {
+	public void updateClassWithError () throws Exception {
 		Class testClass = new Class(8,"Math","virtual class");
 		mvc.perform(MockMvcRequestBuilders
 				.put("/api/class/8")
@@ -78,7 +79,7 @@ class Problem1ApplicationTests {
 	@Test
 	public void getClassOk () throws Exception {
 		mvc.perform(MockMvcRequestBuilders
-				.get("/api/class/1")
+				.get("/api/class/3")
 				.contentType("application/json"))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
@@ -87,6 +88,78 @@ class Problem1ApplicationTests {
 	public void getClassWithError () throws Exception {
 		mvc.perform(MockMvcRequestBuilders
 				.get("/api/class/10")
+				.contentType("application/json"))
+				.andExpect(MockMvcResultMatchers.status().is(404));
+	}
+
+	@Test
+	public void createStudentOk () throws Exception {
+		Student testStudent = new Student(7,"Test","User");
+		mvc.perform(MockMvcRequestBuilders
+				.post("/api/student")
+				.content(objectMapper.writeValueAsString(testStudent))
+				.contentType("application/json"))
+				.andExpect(MockMvcResultMatchers.status().isOk());
+	}
+
+	@Test
+	public void createStudentWithError () throws Exception {
+		Student testStudent = new Student(0,"Test","User");
+		mvc.perform(MockMvcRequestBuilders
+				.post("/api/student")
+				.content(objectMapper.writeValueAsString(testStudent))
+				.contentType("application/json"))
+				.andExpect(MockMvcResultMatchers.status().is(409));
+	}
+
+	@Test
+	public void UpdateStudentOk () throws Exception {
+		Student testStudent = new Student(0,"Test","User");
+		mvc.perform(MockMvcRequestBuilders
+				.put("/api/student/0")
+				.content(objectMapper.writeValueAsString(testStudent))
+				.contentType("application/json"))
+				.andExpect(MockMvcResultMatchers.status().isOk());
+	}
+
+	@Test
+	public void UpdateStudentWithError () throws Exception {
+		Student testStudent = new Student(10,"Test","User");
+		mvc.perform(MockMvcRequestBuilders
+				.put("/api/student/10")
+				.content(objectMapper.writeValueAsString(testStudent))
+				.contentType("application/json"))
+				.andExpect(MockMvcResultMatchers.status().is(404));
+	}
+
+	@Test
+	public void deleteStudentOk () throws Exception {
+		mvc.perform(MockMvcRequestBuilders
+				.delete("/api/student/2")
+				.contentType("application/json"))
+				.andExpect(MockMvcResultMatchers.status().isOk());
+	}
+
+	@Test
+	public void deleteStudentWithError () throws Exception {
+		mvc.perform(MockMvcRequestBuilders
+				.delete("/api/student/9")
+				.contentType("application/json"))
+				.andExpect(MockMvcResultMatchers.status().is(404));
+	}
+
+	@Test
+	public void getStudentOk () throws Exception {
+		mvc.perform(MockMvcRequestBuilders
+				.get("/api/student/0")
+				.contentType("application/json"))
+				.andExpect(MockMvcResultMatchers.status().isOk());
+	}
+
+	@Test
+	public void getStudentWithError () throws Exception {
+		mvc.perform(MockMvcRequestBuilders
+				.get("/api/student/10")
 				.contentType("application/json"))
 				.andExpect(MockMvcResultMatchers.status().is(404));
 	}
