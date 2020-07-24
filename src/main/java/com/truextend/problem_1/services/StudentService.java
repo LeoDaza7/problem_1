@@ -1,12 +1,13 @@
 package com.truextend.problem_1.services;
 
 import com.truextend.problem_1.entities.Student;
-
+import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class StudentService {
 
     private List<Student> studentList = new ArrayList<>(
@@ -35,7 +36,7 @@ public class StudentService {
         return student;
     }
 
-    public void deleteUser(int studentId) {
+    public void deleteStudent(int studentId) {
         studentList.removeIf(student -> student.getStudentID() == studentId);
     }
 
