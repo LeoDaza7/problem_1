@@ -1,6 +1,8 @@
 package com.truextend.problem_1.services;
 
 import com.truextend.problem_1.entities.Class;
+import com.truextend.problem_1.errors.IdNotFoundException;
+import com.truextend.problem_1.errors.IdRepeatedException;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,28 +21,44 @@ public class ClassService {
             )
     );
 
-    public Class createClass(Class classes) {
-        classList.add(classes);
-        return classes;
+    public Class createClass(Class classes) throws IdRepeatedException {
+        if (classList.stream().noneMatch(studentStream -> studentStream.getCode() == classes.getCode())){
+            classList.add(classes);
+            return classes;
+        } else {
+            throw new IdRepeatedException("Class with ID " + classes.getCode());
+        }
+
     }
 
     public List<Class> readClassAll() {
         return classList;
     }
 
-    public Class readClass(int code) {
-        return classList.stream().filter(classStream -> classStream.getCode() == code).collect(Collectors.toList()).get(0);
+    public Class readClass(int code) throws IdNotFoundException {
+        List<Class> currentClass = classList.stream().filter(classStream -> classStream.getCode() == code).collect(Collectors.toList());
+        if (!currentClass.isEmpty()) {
+            return currentClass.get(0);
+        } else {
+            throw new IdNotFoundException("Class with ID " + code);
+        }
     }
 
-    public Class updateClass(Class classes, int code) {
-        Class currentClass = classList.stream().filter(classStream -> classStream.getCode() == code).collect(Collectors.toList()).get(0);
-        currentClass.setTitle(classes.getTitle());
-        currentClass.setDescription(classes.getDescription());
-        return classes;
+    public Class updateClass(Class classes, int code ) throws IdNotFoundException  {
+        List<Class> currentClass = classList.stream().filter(classStream -> classStream.getCode() == code).collect(Collectors.toList());
+        if (!currentClass.isEmpty()){
+            currentClass.get(0).setTitle(classes.getTitle());
+            currentClass.get(0).setDescription(classes.getDescription());
+            return classes;
+        } else {
+            throw new IdNotFoundException("Class with ID " + classes.getCode());
+        }
+
     }
 
-    public void deleteClass(int code) {
-        classList.removeIf(classStream -> classStream.getCode() == code);
+    public void deleteClass(int code) throws IdNotFoundException {
+        if (!classList.removeIf(classStream -> classStream.getCode() == code))
+            throw new IdNotFoundException("Class with ID " + code);
     }
 
 }

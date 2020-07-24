@@ -1,6 +1,8 @@
 package com.truextend.problem_1.services;
 
 import com.truextend.problem_1.entities.ClassStudentAssignment;
+import com.truextend.problem_1.errors.IdNotFoundException;
+import com.truextend.problem_1.errors.IdRepeatedException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,16 +28,26 @@ public class ClassStudentAssignmentService {
         return classStudentAssignmentList;
     }
 
-    public List<ClassStudentAssignment> readClassAssignments(int code) {
-        return classStudentAssignmentList.stream()
+    public List<ClassStudentAssignment> readClassAssignments(int code) throws IdNotFoundException {
+        List<ClassStudentAssignment> classAssignments = classStudentAssignmentList.stream()
                 .filter(classStudentAssignment -> classStudentAssignment.getCode() == code)
                 .collect(Collectors.toList());
+        if (!classAssignments.isEmpty()){
+            return classAssignments;
+        } else {
+            throw new IdNotFoundException("Class with ID " + code);
+        }
     }
 
-    public List<ClassStudentAssignment> readStudentsAssignments(int studentId) {
-        return classStudentAssignmentList.stream()
+    public List<ClassStudentAssignment> readStudentsAssignments(int studentId) throws IdNotFoundException {
+        List<ClassStudentAssignment> studentAssignments = classStudentAssignmentList.stream()
                 .filter(classStudentAssignment -> classStudentAssignment.getStudentId() == studentId)
                 .collect(Collectors.toList());
+        if(!studentAssignments.isEmpty()){
+            return studentAssignments;
+        } else {
+            throw new IdNotFoundException("Student with ID " + studentId);
+        }
     }
 
 }
