@@ -1,6 +1,7 @@
 package com.truextend.problem_1.controllers;
 
 import com.truextend.problem_1.entities.ClassStudentAssignment;
+import com.truextend.problem_1.errors.IdNotFoundException;
 import com.truextend.problem_1.services.ClassStudentAssignmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +19,12 @@ public class ClassStudentAssignmentController {
     private ClassStudentAssignmentService classStudentAssignmentService;
 
     @GetMapping("/student/assignments/{id}")
-    public List<ClassStudentAssignment> getStudentAssignments(@PathVariable(value = "id") int studentId){
+    public List<ClassStudentAssignment> getStudentAssignments(@PathVariable(value = "id") int studentId) throws IdNotFoundException {
         return classStudentAssignmentService.readStudentsAssignments(studentId);
     }
 
     @GetMapping("/class/assignments/{id}")
-    public List<ClassStudentAssignment> getClassAssignments(@PathVariable(value = "id") int code){
+    public List<ClassStudentAssignment> getClassAssignments(@PathVariable(value = "id") int code) throws IdNotFoundException {
         return classStudentAssignmentService.readStudentsAssignments(code);
     }
 
