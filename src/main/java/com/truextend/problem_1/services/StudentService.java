@@ -22,7 +22,7 @@ public class StudentService {
         return student;
     }
 
-    public List<Student> readStudents(){
+    public List<Student> readStudentAll(){
         return studentList;
     }
 
