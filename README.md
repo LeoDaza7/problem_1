@@ -2,7 +2,7 @@
 
 ### Reference Documentation
 
-This is Java 8 Maven API with using Spring boot, lombok and Swagger dependencies.
+This is a Java 8 Maven based API using Spring boot, lombok and Swagger dependencies.
 
 For further reference, please consider the following sections:
 
