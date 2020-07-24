@@ -32,7 +32,9 @@ public class StudentService {
     }
 
     public Student updateStudent(Student student, int studentId) {
-        studentList.stream().filter(studentStream -> studentStream.getStudentID() == studentId).collect(Collectors.toList()).set(0,student);
+        Student currentStudent = studentList.stream().filter(studentStream -> studentStream.getStudentID() == studentId).collect(Collectors.toList()).get(0);
+        currentStudent.setFirstName(student.getFirstName());
+        currentStudent.setLastName(student.getLastName());
         return student;
     }
 

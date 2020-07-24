@@ -33,7 +33,9 @@ public class ClassService {
     }
 
     public Class updateClass(Class classes, int code) {
-        classList.stream().filter(classStream -> classStream.getCode() == code).collect(Collectors.toList()).set(0,classes);
+        Class currentClass = classList.stream().filter(classStream -> classStream.getCode() == code).collect(Collectors.toList()).get(0);
+        currentClass.setTitle(classes.getTitle());
+        currentClass.setDescription(classes.getDescription());
         return classes;
     }
 
