@@ -1,8 +1,11 @@
 # problem_1
 
-### Reference Documentation
+### Description
 
 This is a Java 8 Maven based API using Spring boot, lombok and Swagger dependencies.
+REST API for a system that assigns students to classes. The API can be used by both a UI and programmatically by other systems.
+
+### Reference Documentation
 
 For further reference, please consider the following sections:
 
