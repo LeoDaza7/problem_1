@@ -61,3 +61,7 @@ Double-click lombok.jar (downloadable from this site, or from your maven reposit
 This starts the eclipse installer which will find eclipse (and eclipse variants as listed above),
 and offers to install lombok into these eclipse installations.
 ```
+
+### API swagger ui url
+
+http://localhost:8080/swagger-ui.html
