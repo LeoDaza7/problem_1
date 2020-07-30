@@ -1,7 +1,7 @@
 package com.truextend.problem_1;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.truextend.problem_1.entities.Class;
+import com.truextend.problem_1.entities.Course;
 import com.truextend.problem_1.entities.Student;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,73 +21,73 @@ class Problem1ApplicationTests {
 	private ObjectMapper objectMapper;
 
 	@Test
-	public void createClassOk () throws Exception {
-		Class testClass = new Class(7,"Math","virtual class");
+	public void createCourseOk () throws Exception {
+		Course testCourse = new Course(7,"Math","virtual course");
 		mvc.perform(MockMvcRequestBuilders
-				.post("/api/class")
-				.content(objectMapper.writeValueAsString(testClass))
+				.post("/api/course")
+				.content(objectMapper.writeValueAsString(testCourse))
 				.contentType("application/json"))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 
 	@Test
-	public void createClassWithError () throws Exception {
-		Class testClass = new Class(1,"Math","virtual class");
+	public void createCourseWithError () throws Exception {
+		Course testCourse = new Course(1,"Math","virtual course");
 		mvc.perform(MockMvcRequestBuilders
-				.post("/api/class")
-				.content(objectMapper.writeValueAsString(testClass))
+				.post("/api/course")
+				.content(objectMapper.writeValueAsString(testCourse))
 				.contentType("application/json"))
 				.andExpect(MockMvcResultMatchers.status().is(409));
 	}
 
 	@Test
-	public void updateClassOk () throws Exception {
-		Class testClass = new Class(1,"Math","virtual class");
+	public void updateCourseOk () throws Exception {
+		Course testCourse = new Course(1,"Math","virtual course");
 		mvc.perform(MockMvcRequestBuilders
-				.put("/api/class/1")
-				.content(objectMapper.writeValueAsString(testClass))
+				.put("/api/course/1")
+				.content(objectMapper.writeValueAsString(testCourse))
 				.contentType("application/json"))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 
 	@Test
-	public void updateClassWithError () throws Exception {
-		Class testClass = new Class(8,"Math","virtual class");
+	public void updateCourseWithError () throws Exception {
+		Course testCourse = new Course(8,"Math","virtual course");
 		mvc.perform(MockMvcRequestBuilders
-				.put("/api/class/8")
-				.content(objectMapper.writeValueAsString(testClass))
+				.put("/api/course/8")
+				.content(objectMapper.writeValueAsString(testCourse))
 				.contentType("application/json"))
 				.andExpect(MockMvcResultMatchers.status().is(404));
 	}
 
 	@Test
-	public void deleteClassOk () throws Exception {
+	public void deleteCourseOk () throws Exception {
 		mvc.perform(MockMvcRequestBuilders
-				.delete("/api/class/1")
+				.delete("/api/course/1")
 				.contentType("application/json"))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 
 	@Test
-	public void deleteClassWithError () throws Exception {
+	public void deleteCourseWithError () throws Exception {
 		mvc.perform(MockMvcRequestBuilders
-				.delete("/api/class/9")
+				.delete("/api/course/9")
 				.contentType("application/json"))
 				.andExpect(MockMvcResultMatchers.status().is(404));
 	}
 
 	@Test
-	public void getClassOk () throws Exception {
+	public void getCourseOk () throws Exception {
 		mvc.perform(MockMvcRequestBuilders
-				.get("/api/class/3")
+				.get("/api/course/3")
 				.contentType("application/json"))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 
 	@Test
-	public void getClassWithError () throws Exception {
+	public void getCourseWithError () throws Exception {
 		mvc.perform(MockMvcRequestBuilders
-				.get("/api/class/10")
+				.get("/api/course/10")
 				.contentType("application/json"))
 				.andExpect(MockMvcResultMatchers.status().is(404));
 	}
