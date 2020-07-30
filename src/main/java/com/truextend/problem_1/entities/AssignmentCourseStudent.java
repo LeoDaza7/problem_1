@@ -9,9 +9,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClassStudentAssignment {
+public class AssignmentCourseStudent {
 
-    private int studentId;
-    private int code;
+    private int assignmentId;
+    private Student student;
+    private Course course;
 
 }
