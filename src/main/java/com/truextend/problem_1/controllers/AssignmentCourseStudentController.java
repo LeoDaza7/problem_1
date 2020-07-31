@@ -1,6 +1,7 @@
 package com.truextend.problem_1.controllers;
 
 import com.truextend.problem_1.entities.AssignmentCourseStudent;
+import com.truextend.problem_1.errors.AssignmentRepeatedException;
 import com.truextend.problem_1.errors.IdNotFoundException;
 import com.truextend.problem_1.errors.IdRepeatedException;
 import com.truextend.problem_1.services.AssignmentCourseStudentService;
@@ -32,7 +33,7 @@ public class AssignmentCourseStudentController {
     }
 
     @PostMapping("")
-    public AssignmentCourseStudent postAssignment(@RequestBody AssignmentCourseStudent newAssignment) throws IdRepeatedException {
+    public AssignmentCourseStudent postAssignment(@RequestBody AssignmentCourseStudent newAssignment) throws IdRepeatedException, AssignmentRepeatedException {
         return assignmentCourseStudentService.createAssignmentCourseStudent(newAssignment);
     }
 

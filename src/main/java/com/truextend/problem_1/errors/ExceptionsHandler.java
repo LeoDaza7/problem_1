@@ -19,4 +19,9 @@ public class ExceptionsHandler {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.resolve(exception.getResponseCode()));
     }
 
+    @ExceptionHandler(AssignmentRepeatedException.class)
+    public ResponseEntity<?> assignmentRepeated(AssignmentRepeatedException exception, WebRequest webRequest) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.resolve(exception.getResponseCode()));
+    }
+
 }
