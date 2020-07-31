@@ -24,6 +24,7 @@ public class CourseService {
     public Course createCourse(Course newCourse) throws IdRepeatedException {
         if (courseList.stream().anyMatch(courseOnList -> courseOnList.getCode() == newCourse.getCode()))
             throw new IdRepeatedException("Course with ID " + newCourse.getCode());
+        courseList.add(newCourse);
         return newCourse;
     }
 

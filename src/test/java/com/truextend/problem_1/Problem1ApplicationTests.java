@@ -167,7 +167,7 @@ class Problem1ApplicationTests {
 	@Test
 	public void getStudentAssignmentOk() throws Exception {
 		mvc.perform(MockMvcRequestBuilders
-				.get("/api/assignments/student/0")
+				.get("/api/assignment/student/0")
 				.contentType("application/json"))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
@@ -175,7 +175,7 @@ class Problem1ApplicationTests {
 	@Test
 	public void getStudentAssignmentWithError() throws Exception {
 		mvc.perform(MockMvcRequestBuilders
-				.get("/api/assignments/student/11")
+				.get("/api/assignment/student/11")
 				.contentType("application/json"))
 				.andExpect(MockMvcResultMatchers.status().is(404));
 	}
@@ -183,7 +183,7 @@ class Problem1ApplicationTests {
 	@Test
 	public void getCourseAssignmentOk() throws Exception {
 		mvc.perform(MockMvcRequestBuilders
-				.get("/api/assignments/course/2")
+				.get("/api/assignment/course/2")
 				.contentType("application/json"))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
@@ -191,10 +191,9 @@ class Problem1ApplicationTests {
 	@Test
 	public void getCourseAssignmentWithError() throws Exception {
 		mvc.perform(MockMvcRequestBuilders
-				.get("/api/assignments/course/12")
+				.get("/api/assignment/course/12")
 				.contentType("application/json"))
 				.andExpect(MockMvcResultMatchers.status().is(404));
 	}
-
 
 }

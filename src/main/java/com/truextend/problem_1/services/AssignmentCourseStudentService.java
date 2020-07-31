@@ -2,6 +2,7 @@ package com.truextend.problem_1.services;
 
 import com.truextend.problem_1.entities.AssignmentCourseStudent;
 import com.truextend.problem_1.errors.IdNotFoundException;
+import com.truextend.problem_1.errors.IdRepeatedException;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +21,16 @@ public class AssignmentCourseStudentService {
 
     public List<AssignmentCourseStudent> readAllCourseStudentAssignments() {
         return classStudentAssignmentList;
+    }
+
+    public AssignmentCourseStudent createAssignmentCourseStudent(AssignmentCourseStudent newAssignment) throws IdRepeatedException {
+        if(classStudentAssignmentList.stream().anyMatch(assignmentOnList -> assignmentOnList.getAssignmentId() == newAssignment.getAssignmentId()))
+            throw new IdRepeatedException("Assignment with ID " + newAssignment.getAssignmentId());
+        if(classStudentAssignmentList.stream().anyMatch(assignmentOnList -> assignmentOnList.getCourse().getCode() == newAssignment.getCourse().getCode() &&
+                assignmentOnList.getStudent().getStudentID() == newAssignment.getStudent().getStudentID()))
+            throw new IdRepeatedException("Student with ID " + newAssignment.getStudent().getStudentID());
+        classStudentAssignmentList.add(newAssignment);
+        return newAssignment;
     }
 
     public List<AssignmentCourseStudent> readCourseAssignments(int code) throws IdNotFoundException {
