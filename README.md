@@ -65,3 +65,10 @@ and offers to install lombok into these eclipse installations.
 ### API swagger ui url
 
 http://localhost:8080/swagger-ui.html
+
+### Test ###
+
+```shell script
+mvn clean package
+mvn test
+```
