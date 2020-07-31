@@ -27,7 +27,7 @@ public class AssignmentCourseStudentController {
         return assignmentCourseStudentService.readStudentsAssignments(studentId);
     }
 
-    @GetMapping("/class/{id}")
+    @GetMapping("/course/{id}")
     public List<AssignmentCourseStudent> getCourseAssignments(@PathVariable(value = "id") int code) throws IdNotFoundException {
         return assignmentCourseStudentService.readCourseAssignments(code);
     }
