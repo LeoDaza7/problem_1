@@ -1,6 +1,7 @@
 package com.truextend.problem_1;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.truextend.problem_1.entities.AssignmentCourseStudent;
 import com.truextend.problem_1.entities.Course;
 import com.truextend.problem_1.entities.Student;
 import org.junit.jupiter.api.Test;
@@ -194,6 +195,26 @@ class Problem1ApplicationTests {
 				.get("/api/assignment/course/12")
 				.contentType("application/json"))
 				.andExpect(MockMvcResultMatchers.status().is(404));
+	}
+
+	@Test
+	public void postAssignmentOk() throws Exception {
+		AssignmentCourseStudent newAssignment = new AssignmentCourseStudent (2,new Student(7,"Test","User"),new Course(8,"Math","virtual course"));
+		mvc.perform(MockMvcRequestBuilders
+				.post("/api/assignment")
+				.content(objectMapper.writeValueAsString(newAssignment))
+				.contentType("application/json"))
+				.andExpect(MockMvcResultMatchers.status().isOk());
+	}
+
+	@Test
+	public void postAssignmentWithError() throws Exception {
+		AssignmentCourseStudent newAssignment = new AssignmentCourseStudent (0,new Student(7,"Test","User"),new Course(8,"Math","virtual course"));
+		mvc.perform(MockMvcRequestBuilders
+				.post("/api/assignment")
+				.content(objectMapper.writeValueAsString(newAssignment))
+				.contentType("application/json"))
+				.andExpect(MockMvcResultMatchers.status().is(409));
 	}
 
 }
