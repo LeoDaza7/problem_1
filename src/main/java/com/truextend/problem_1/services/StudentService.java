@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Service
 public class StudentService {
 
-    private List<Student> studentList = new ArrayList<>(
+    public static List<Student> studentList = new ArrayList<>(
             Arrays.asList(
                     new Student(0,"Wilson","John"),
                     new Student(1,"Graham","Jane"),
