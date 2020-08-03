@@ -4,18 +4,20 @@ import com.truextend.problem_1.entities.Course;
 import com.truextend.problem_1.errors.IdNotFoundException;
 import com.truextend.problem_1.errors.IdRepeatedException;
 import com.truextend.problem_1.services.CourseService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/course")
+@AllArgsConstructor
 public class CourseController {
 
     @Autowired
-    private CourseService courseService;
+    private final CourseService courseService;
 
-    @GetMapping("")
+    @GetMapping
     public List<Course> getCourseList() {
         return courseService.readCourseAll();
     }
@@ -25,7 +27,7 @@ public class CourseController {
         return courseService.readCourse(code);
     }
 
-    @PostMapping("")
+    @PostMapping
     public Course postCourse(@RequestBody Course course) throws IdRepeatedException {
         return courseService.createCourse(course);
     }

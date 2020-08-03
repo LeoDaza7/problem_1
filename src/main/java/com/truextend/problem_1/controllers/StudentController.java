@@ -4,18 +4,20 @@ import com.truextend.problem_1.entities.Student;
 import com.truextend.problem_1.errors.IdNotFoundException;
 import com.truextend.problem_1.errors.IdRepeatedException;
 import com.truextend.problem_1.services.StudentService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/student")
+@AllArgsConstructor
 public class StudentController {
 
     @Autowired
-    private StudentService studentService;
+    private final StudentService studentService;
 
-    @GetMapping("")
+    @GetMapping
     public List<Student> getStudentList(){
         return studentService.readStudentAll();
     }
@@ -25,7 +27,7 @@ public class StudentController {
         return studentService.readStudent(studentId);
     }
 
-    @PostMapping("")
+    @PostMapping
     public Student postStudent(@RequestBody Student student) throws IdRepeatedException {
         return studentService.createStudent(student);
     }

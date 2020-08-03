@@ -5,6 +5,7 @@ import com.truextend.problem_1.errors.AssignmentRepeatedException;
 import com.truextend.problem_1.errors.IdNotFoundException;
 import com.truextend.problem_1.errors.IdRepeatedException;
 import com.truextend.problem_1.services.AssignmentCourseStudentService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,12 +13,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/assignment")
+@AllArgsConstructor
 public class AssignmentCourseStudentController {
 
     @Autowired
-    private AssignmentCourseStudentService assignmentCourseStudentService;
+    private final AssignmentCourseStudentService assignmentCourseStudentService;
 
-    @GetMapping("")
+    @GetMapping
     public List<AssignmentCourseStudent> getAllAssignments() {
         return assignmentCourseStudentService.readAllCourseStudentAssignments();
     }
@@ -32,8 +34,8 @@ public class AssignmentCourseStudentController {
         return assignmentCourseStudentService.readCourseAssignments(code);
     }
 
-    @PostMapping("")
-    public AssignmentCourseStudent postAssignment(@RequestBody AssignmentCourseStudent newAssignment) throws IdRepeatedException, AssignmentRepeatedException {
+    @PostMapping
+    public AssignmentCourseStudent postAssignment(@RequestBody AssignmentCourseStudent newAssignment) throws IdRepeatedException, AssignmentRepeatedException, IdNotFoundException {
         return assignmentCourseStudentService.createAssignmentCourseStudent(newAssignment);
     }
 
